@@ -1,39 +1,34 @@
-Tasks
-0. Create a file
-mandatory
-Using Puppet, create a file in /tmp.
+# 0x0A Configuration management
 
-Requirements:
+## Resources:books:
+Read or watch:
+* [Intro to Configuration Management](https://intranet.hbtn.io/rltoken/r-NmkYO8bxIKp2qEx2ZjKQ)
+* [Puppet resource type: file](https://intranet.hbtn.io/rltoken/fuhnsI9_1_F4GrHwGT3GxA)
+* [Puppet’s Declarative Language: Modeling Instead of Scripting](https://intranet.hbtn.io/rltoken/Fqmb5rnChQgYAypvKoTxAQ)
+* [Puppet lint](https://intranet.hbtn.io/rltoken/oezu0m_hJ8nEVA6a9o17Tw)
+* [Puppet emacs mode](https://intranet.hbtn.io/rltoken/N70cVw8mG3707He-OxjP1w)
 
-File path is /tmp/school
-File permission is 0744
-File owner is www-data
-File group is www-data
-File contains I love Puppet
+---
+Tasks:
+<!--
+* **0. Create a file**
+  * [0-create_a_file.pp](./0-create_a_file.pp): Puppet manifest file that
+    creates a file `holberton` in the `/tmp` directory.
+        * File permissions: `0744`.
+	    * File group: `www-data`.
+	        * File owner: `www-data`.
+		    * File content: `I love Puppet`.
 
-GitHub repository: alx-system_engineering-devops
-Directory: 0x0A-configuration_management
-File: 0-create_a_file.pp
+* **1. Install a package**
+  * [1-install_a_package.pp](./1-install_a_package.pp): Puppet manifest file
+    that install puppet-lint version 2.1.1.
 
-1. Install a package
-mandatory
-Using Puppet, install flask from pip3.
+* **2. Execute a command**
+  * [2-execute_a_command.pp](./2-execute_a_command.pp): Puppet manifest file
+    that kills the process `killmenow`.
+-->
 
-Requirements:
+---
 
-Install flask
-Version must be 2.1.0
-File: 1-install_a_package.pp
-
-2. Execute a command
-mandatory
-Using Puppet, create a manifest that kills a process named killmenow.
-
-Requirements:
-
-Must use the exec Puppet resource
-Must use pkill
-Example:
-
-Terminal #0 - starting my process
-File: 2-execute_a_command.pp
+## Author
+* **Estephania Calvo Carvajal** - [EstephaniaCalvoC](https://github.com/EstephaniaCalvoC)

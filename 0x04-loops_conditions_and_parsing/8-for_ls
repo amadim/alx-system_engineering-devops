@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Displays content of the current directory in a list format
-# only displays the part after the "-" dash
+#Display the content of the current directory in a list format
+#without number prefix.
 
-list=$(ls)
-for i in $list;
-do
-  echo "$i" | cut -d '-' -f2
+files=$(ls)
+
+for f in $files; do
+    echo "$f" | cut -d '-' -f2
 done

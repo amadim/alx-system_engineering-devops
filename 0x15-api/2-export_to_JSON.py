@@ -1,39 +1,22 @@
 #!/usr/bin/python3
-'''
-For a given employee ID, returns information about his/her
-TODO list progress in JSON format.
-'''
+"""Export to csv the information about user TODO list progress"""
+import json
+import requests
+from sys import argv
 
-if __name__ == '__main__':
-    import json
-    import requests
-    import sys
 
-    NUMBER_OF_DONE_TASKS = 0
-    TASK_TITLE = []
-    USER_ID = sys.argv[1]
+if __name__ == "__main__":
+    user_id = argv[1]
 
-    user = requests.get('https://jsonplaceholder.typicode.com/users/{}'.
-                        format(USER_ID))
-    name = user.json()
-    username = name.get('username')
+    url = "https://jsonplaceholder.typicode.com/"
+    uri_user_id = "users/{}".format(user_id)
+    uri_todos = "todos"
 
-    req = requests.get('https://jsonplaceholder.typicode.com/todos?userId={}'.
-                       format(USER_ID))
-    todos = req.json()
+    user_name = requests.get(url + uri_user_id).json().get("username")
+    tasks = requests.get(url + uri_todos, params={"userId": user_id}).json()
 
-    json_dictionary = {}
-    json_list = []
-
-    for item in todos:
-        json_dictionary['task'] = item.get('title')
-        json_dictionary['completed'] = item.get('completed')
-        json_dictionary['username'] = username
-        json_list.append(json_dictionary)
-        json_dictionary = {}
-
-    json_return = {}
-    json_return[USER_ID] = json_list
-
-    with open(USER_ID + '.json', 'w') as json_file:
-        json.dump(json_return, json_file)
+    with open("{}.json".format(user_id), "w", newline="") as jsonfile:
+        json.dump({user_id: [{"task": task.get("title"),
+                              "completed": task.get("completed"),
+                              "username": user_name} for task in tasks]},
+                  jsonfile)

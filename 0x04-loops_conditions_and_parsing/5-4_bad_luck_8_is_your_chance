@@ -1,21 +1,19 @@
 #!/usr/bin/env bash
-# Bash script that loops from 1 to 10 and:
-# displays bad luck for the 4th loop iteration
-# displays good luck for the 8th loop iteration
-# displays Best School for the other iterations
+#Display bath look, good luck at the 4th and 8th lines respectively
+#Display Holberton School at the other lines.
 
-num=1
+i=1
 
-while [ $num -le 10 ]
+while [ $i -lt 11 ]
 do
-  if [ $num -eq 4 ]
-  then
-    echo "bad luck"
-  elif [ $num -eq 8 ]
-  then
-    echo "good luck"
-  else
-    echo "Best School"
-  fi
-  ((num++))
+    if [ $i -eq 4 ]
+    then
+	echo "bad luck"
+    elif [ $i -eq 8 ]
+    then
+	echo "good luck"
+    else
+	echo "Holberton School"
+    fi
+    (( i++ ))
 done

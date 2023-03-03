@@ -1,25 +1,24 @@
-# Script to install nginx using puppet
+# Install a web server Nginx
+# listening on port 80
+# GET root / return a page that contains the string Holberton School
+# The redirection is “301 Moved Permanently”
 
-package {'nginx':
-  ensure => 'present',
+package { 'nginx':
+ensure => installed,
 }
 
-exec {'install':
-  command  => 'sudo apt-get update ; sudo apt-get -y install nginx',
-  provider => shell,
-
+file { '/var/www/html/index.html':
+content => 'Holberton School',
 }
 
-exec {'Hello':
-  command  => 'echo "Hello World!" | sudo tee /var/www/html/index.html',
-  provider => shell,
+file_line {'Add redirection, 301':
+  ensure => present,
+  path   => '/etc/nginx/sites-available/default',
+  after  => 'listen 80 default_server',
+  line   => 'rewrite ^/redirect_me https://github.com/EstephaniaCalvoC/ permanent;',
 }
 
-exec {'sudo sed -i "s/listen 80 default_server;/listen 80 default_server;\\n\\tlocation \/redirect_me {\\n\\t\\treturn 301 https:\/\/blog.ehoneahobed.com\/;\\n\\t}/" /etc/nginx/sites-available/default':
-  provider => shell,
-}
-
-exec {'run':
-  command  => 'sudo service nginx restart',
-  provider => shell,
+service { 'nginx':
+ensure  => running,
+require => Package['nginx'],
 }
